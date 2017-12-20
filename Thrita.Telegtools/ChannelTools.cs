@@ -10,14 +10,13 @@ using TLSharp.Core;
 namespace Thrita.Telegtools
 {
     /*
- * Read: https://github.com/sochix/TLSharp#starter-guide
- * Read: https://stackoverflow.com/questions/37189908/how-can-i-get-channel-messages-from-telegram-channels-with-tlsharp
- * 
- */
+    * Read: https://github.com/sochix/TLSharp#starter-guide
+    * Read: https://stackoverflow.com/questions/37189908/how-can-i-get-channel-messages-from-telegram-channels-with-tlsharp
+    */
 
     public class ChannelTools
     {
-        private readonly TelegramClient _client;
+        private static TelegramClient _client;
 
         public ChannelTools() : this(TelegramClientProvider.GetTelegramClient()) { }
 
@@ -26,36 +25,32 @@ namespace Thrita.Telegtools
             _client = telegramClient;
         }
 
-//        public async Task<IEnumerable<TLMessage>> GatherChannelHistory(string channelName)
+        //        public async Task<IEnumerable<TLMessage>> GatherChannelHistory(string channelName)
         public async Task GatherChannelHistory(string channelName)
         {
-            if (!_client.IsConnected)
-                await _client.ConnectAsync();
-
-            //await AuthorizeAsync();
+            await _client.ConnectAsync();
 
             const int LIMIT = 100;
             int maxid = -1;
             var result = new List<TLMessage>();
             IEnumerable<TLMessage> slice;
+            int offset = 0;
 
             do
             {
-                slice = await GatherChannelHistory(channelName, maxId: maxid, limit: LIMIT);
-                result.AddRange(slice);
-                maxid = slice.Min(m => m.Id);
+                slice = await GatherChannelHistory(channelName, offset, maxId: maxid, limit: LIMIT);
+                if (slice.Any())
+                {
+                    result.AddRange(slice);
+                    //maxid = slice.Min(m => m.Id);
+                    offset = offset + LIMIT;
+                }
             } while (slice.Count() == LIMIT);
 
             //return result;
             int x = result.Count();
+            System.IO.File.WriteAllLines(@"TLMSGS.TXT", result.Select(m => TLMessageToString((TLMessage)m)));
         }
-
-        //private async Task AuthorizeAsync()
-        //{
-        //    var hash = await _client.SendCodeRequestAsync(USERNAME);
-        //    var code = "<code_from_telegram>"; // you can change code in debugger
-        //    var user = await _client.MakeAuthAsync(USERNAME, hash, code);
-        //}
 
         private async Task<IEnumerable<TLMessage>> GatherChannelHistory(string channelName, int offset = 0, int maxId = -1, int limit = 100)
         {
@@ -77,7 +72,8 @@ namespace Thrita.Telegtools
                      maxId, limit);
 
             var tlChannelMessages = (TLChannelMessages)tlAbsMessages;
-            return tlChannelMessages.Messages.Cast<TLMessage>().AsEnumerable();
+            var messages = tlChannelMessages.Messages.Cast<TLMessage>().AsEnumerable();
+            return messages;
 
             //var messages = tlChannelMessages.Messages.ToList();
             //var messagesCount = tlChannelMessages.Messages.ToList().Count;
@@ -162,7 +158,7 @@ namespace Thrita.Telegtools
             //        }
             //    }
 
-            }
+        }
 
 
         private String TLMessageToString(TLMessage message)
