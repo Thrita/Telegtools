@@ -7,40 +7,14 @@ namespace Thrita.Telegtools.Tlt
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("1. Gather Channel History");
-            Console.WriteLine("2. Authorize this app");
-            Console.WriteLine("\nSelect: ");
-            var selected = Console.ReadKey();
-
-            try
+            if (args == null || args.Length == 0)
             {
-                switch (selected.Key)
-                {
-                    case ConsoleKey.D1:
-                        GatherChannelHistory();
-                        break;
-                    case ConsoleKey.D2:
-                        Authorize();
-                        break;
-                    default:
-                        break;
-                }
+                ShowMenu();
             }
-            catch (Exception ex)  //Exceptions here or in the function will be caught here
+            else
             {
-                int exLevel = 0;
-                while (ex != null)
-                {
-                    Console.WriteLine(new string('\t', exLevel) + ex.Message);
-                    ex = ex.InnerException;
-                }
-            }
 
-            Console.WriteLine("THE END!");
-#if DEBUG
-            Console.WriteLine("Press a key.");
-            Console.ReadKey();
-#endif
+            }
         }
 
         static void GatherChannelHistory()
@@ -60,7 +34,50 @@ namespace Thrita.Telegtools.Tlt
             var code = Console.ReadLine();
             var callTask2 = Task.Run(() => new AuthorizeTool().AuthorizeAsyncStep2(hash, code));
             callTask.Wait();
-            Console.Write("Authorized successfully!");
+            Console.Write("Authorized successfully!\n\n");
+        }
+
+        static void ShowMenu()
+        {
+            ConsoleKeyInfo selected;
+
+            do
+            {
+                Console.WriteLine("1. Gather Channel History");
+                Console.WriteLine("2. Authorize this app");
+                Console.WriteLine("X. Exit");
+                Console.Write("\nSelect: ");
+                selected = Console.ReadKey();
+                Console.WriteLine("\n");
+
+                try
+                {
+                    switch (selected.Key)
+                    {
+                        case ConsoleKey.D1:
+                            GatherChannelHistory();
+                            break;
+                        case ConsoleKey.D2:
+                            Authorize();
+                            break;
+                        case ConsoleKey.Escape:
+                        case ConsoleKey.X:
+                            break;
+                        default:
+                            Console.WriteLine("'{0}' is not valid.", selected.Key);
+                            break;
+                    }
+                }
+                catch (Exception ex)  //Exceptions here or in the function will be caught here
+                {
+                    int exLevel = 0;
+                    while (ex != null)
+                    {
+                        Console.WriteLine(new string('\t', exLevel) + ex.Message);
+                        ex = ex.InnerException;
+                    }
+                }
+            } while (selected.Key != ConsoleKey.Escape && selected.Key != ConsoleKey.X);
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Thrita.Telegtools
         public async Task<string> AuthorizeAsyncStep1()
         {
             var phoneNumber = TelegramClientConfigProvider.GetFromAppConfig().PhoneNumber;
+            await _client.ConnectAsync();
             return await _client.SendCodeRequestAsync(phoneNumber); // returns 'hash'
         }
 
@@ -29,6 +30,7 @@ namespace Thrita.Telegtools
 
         internal protected async Task<TLUser> AuthorizeAsyncStep2(string phoneNumber, string hashFromStep1, string loginCode)
         {
+            await _client.ConnectAsync();
             return await _client.MakeAuthAsync(phoneNumber, hashFromStep1, loginCode);
         }
     }
