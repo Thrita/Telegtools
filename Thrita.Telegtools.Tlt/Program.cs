@@ -7,11 +7,46 @@ namespace Thrita.Telegtools.Tlt
     {
         static void Main(string[] args)
         {
+            if (args == null || args.Length == 0)
+            {
+                ShowMenu();
+            }
+            else
+            {
+
+            }
+        }
+
+        static void GatherChannelHistory()
+        {
+            const string defaultChannelName = "K1 in USA - 2";
+            Console.Write($"Enter the channel name (default: {defaultChannelName}): ");
+            var channelName = Console.ReadLine();
+            channelName = string.IsNullOrEmpty(channelName) ? defaultChannelName : channelName;
+            var callTask = Task.Run(() => new ChannelTools().GatherChannelHistory(channelName));
+            callTask.Wait();
+        }
+
+        static void Authorize()
+        {
+            var callTask = Task.Run(() => new AuthorizeTool().AuthorizeAsyncStep1());
+            callTask.Wait();
+            Console.Write("Enter Telegram Login Code (sent to your telegram app): ");
+            var code = Console.ReadLine();
+            var callTask2 = Task.Run(() => new AuthorizeTool().AuthorizeAsyncStep2(code));
+            callTask.Wait();
+            Console.Write("Authorized successfully!");
+        }
+
+        static void ShowMenu()
+        {
             ConsoleKeyInfo selectedKey;
+
             do
             {
                 Console.WriteLine("1. Gather Channel History");
                 Console.WriteLine("2. Authorize this app");
+                Console.WriteLine("X. Exit");
                 Console.Write("\nSelect: ");
                 selectedKey = Console.ReadKey();
                 Console.WriteLine("\n");
@@ -48,25 +83,5 @@ namespace Thrita.Telegtools.Tlt
 #endif
         }
 
-        static void GatherChannelHistory()
-        {
-            const string defaultChannelName = "K1 in USA - 2";
-            Console.Write($"Enter the channel name (default: {defaultChannelName}): ");
-            var channelName = Console.ReadLine();
-            channelName = string.IsNullOrEmpty(channelName) ? defaultChannelName : channelName;
-            var callTask = Task.Run(() => new ChannelTools().GatherChannelHistory(channelName));
-            callTask.Wait();
-        }
-
-        static void Authorize()
-        {
-            var callTask = Task.Run(() => new AuthorizeTool().AuthorizeAsyncStep1());
-            callTask.Wait();
-            Console.Write("Enter Telegram Login Code (sent to your telegram app): ");
-            var code = Console.ReadLine();
-            var callTask2 = Task.Run(() => new AuthorizeTool().AuthorizeAsyncStep2(code));
-            callTask.Wait();
-            Console.Write("Authorized successfully!");
-        }
     }
 }
