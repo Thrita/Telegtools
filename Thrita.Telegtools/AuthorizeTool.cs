@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using TeleSharp.TL;
 using TLSharp.Core;
 
@@ -6,7 +7,9 @@ namespace Thrita.Telegtools
 {
     public class AuthorizeTool
     {
-        private static TelegramClient _client;
+        private TelegramClient _client;
+        private string _step1Hash;
+        private string _phoneNumber;
 
         public AuthorizeTool() : this(TelegramClientProvider.GetTelegramClient()) { }
 
@@ -15,16 +18,24 @@ namespace Thrita.Telegtools
             _client = telegramClient;
         }
 
-        public async Task<string> AuthorizeAsyncStep1()
+        public async Task AuthorizeAsyncStep1()
         {
-            var phoneNumber = TelegramClientConfigProvider.GetFromAppConfig().PhoneNumber;
-            return await _client.SendCodeRequestAsync(phoneNumber); // returns 'hash'
+            _phoneNumber = TelegramClientConfigProvider.GetFromAppConfig().PhoneNumber;
+            await _client.ConnectAsync();
+            _step1Hash = await _client.SendCodeRequestAsync(_phoneNumber); // returns 'hash'
         }
 
-        public async Task AuthorizeAsyncStep2(string hashFromStep1, string loginCode)
+        public async Task AuthorizeAsyncStep2(string loginCode)
         {
-            var phoneNumber = TelegramClientConfigProvider.GetFromAppConfig().PhoneNumber;
-            await AuthorizeAsyncStep2(phoneNumber, hashFromStep1, loginCode);
+            if (string.IsNullOrWhiteSpace(loginCode))
+                throw new ArgumentException(nameof(loginCode));
+
+            if (string.IsNullOrWhiteSpace(_phoneNumber) || string.IsNullOrWhiteSpace(_step1Hash))
+                throw new Exception("You need to call 'AuthorizeAsyncStep1()' first.");
+
+            await AuthorizeAsyncStep2(_phoneNumber, _step1Hash, loginCode);
+            _step1Hash = null;
+            _phoneNumber = null;
         }
 
         internal protected async Task<TLUser> AuthorizeAsyncStep2(string phoneNumber, string hashFromStep1, string loginCode)
