@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Thrita.Telegtools.Tlt
 {
@@ -19,12 +20,20 @@ namespace Thrita.Telegtools.Tlt
 
         static void GatherChannelHistory()
         {
-            const string defaultChannelName = "K1 in USA - 2";
-            Console.Write($"Enter the channel name (default: {defaultChannelName}): ");
-            var channelName = Console.ReadLine();
-            channelName = string.IsNullOrEmpty(channelName) ? defaultChannelName : channelName;
-            var callTask = Task.Run(() => new ChannelTools().GatherChannelHistory(channelName));
-            callTask.Wait();
+            //const string defaultChannelName = "K1 in USA - 2";
+            //Console.Write($"Enter the channel name (default: {defaultChannelName}): ");
+            //var channelName = Console.ReadLine();
+            //channelName = string.IsNullOrEmpty(channelName) ? defaultChannelName : channelName;
+            //var callTask = Task.Run(() => new ChannelTools().GatherChannelHistory(channelName));
+            //callTask.Wait();
+
+            var channelName = "K1inUSA";
+
+            for (int i = 1; i <= 10; i++)
+            {
+                var callTask = Task.Run(() => GatherChannelHistoryFromWeb(channelName, i));
+                callTask.Wait();
+            }
         }
 
         static void Authorize()
@@ -61,6 +70,11 @@ namespace Thrita.Telegtools.Tlt
                         case ConsoleKey.D2:
                             Authorize();
                             break;
+                        case ConsoleKey.Enter:
+
+                            //Task.Run(() => new ChannelTools().GatherChannelHistory_("K1 in USA - 2")).Wait();
+
+                            break;
                         default:
                             break;
                     }
@@ -83,5 +97,22 @@ namespace Thrita.Telegtools.Tlt
 #endif
         }
 
+
+        public static void GatherChannelHistoryFromWeb(string channelName, int postId)
+        {
+            var url = string.Format("https://t.me/{0}/{1}?embed=1", channelName, postId);
+            var web = new HtmlAgilityPack.HtmlWeb();
+            var doc = web.Load(url);
+
+            var div = doc.DocumentNode.Descendants("div")
+                .SingleOrDefault(m => m.Attributes["class"]?.Value == "tgme_widget_message_text");
+
+
+            if (div != null)
+                Console.WriteLine(div.InnerHtml);
+            else
+                Console.WriteLine("_________________");
+
+        }
     }
 }
