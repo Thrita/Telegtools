@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Collections.Generic;
+using Thrita.Telegtools.EntityFramework;
 
 namespace Thrita.Telegtools.Tlt
 {
     class Program
     {
+        const string DefaultChannelName = "Telegram";
+
         static void Main(string[] args)
         {
             if (args == null || args.Length == 0)
@@ -18,7 +22,7 @@ namespace Thrita.Telegtools.Tlt
             }
         }
 
-        static void GatherChannelHistory()
+        static void GatherChannelHistory(string channelName)
         {
             //const string defaultChannelName = "K1 in USA - 2";
             //Console.Write($"Enter the channel name (default: {defaultChannelName}): ");
@@ -27,12 +31,27 @@ namespace Thrita.Telegtools.Tlt
             //var callTask = Task.Run(() => new ChannelTools().GatherChannelHistory(channelName));
             //callTask.Wait();
 
-            var channelName = "K1inUSA";
+            channelName = channelName ?? DefaultChannelName;
+            var tools = new WebChannelTools();
 
-            for (int i = 1; i <= 10; i++)
+            for (int postId = 8; postId <= 11; postId++)
             {
-                var callTask = Task.Run(() => GatherChannelHistoryFromWeb(channelName, i));
-                callTask.Wait();
+                var telegramPost = tools.GetPost(channelName, postId);
+
+                if (telegramPost == null)
+                {
+                    Console.WriteLine("Could not read post {0}.", postId);
+                }
+                else
+                {
+                    Console.Write("Saving post {0}. ", postId);
+                    using (var ctx = new TelegtoolsContext("Thrita.Telegtools.EntityFramework.DbConnection"))
+                    {
+                        ctx.TelegramPosts.Add(telegramPost);
+                        ctx.SaveChanges();
+                        Console.WriteLine("Post {0} has saved.", postId);
+                    }
+                }
             }
         }
 
@@ -65,7 +84,7 @@ namespace Thrita.Telegtools.Tlt
                     switch (selectedKey.Key)
                     {
                         case ConsoleKey.D1:
-                            GatherChannelHistory();
+                            GatherChannelHistory(null);
                             break;
                         case ConsoleKey.D2:
                             Authorize();
@@ -97,22 +116,10 @@ namespace Thrita.Telegtools.Tlt
 #endif
         }
 
-
-        public static void GatherChannelHistoryFromWeb(string channelName, int postId)
+        public static TelegramPost GatherChannelHistoryFromWeb(string channelName, int postId)
         {
-            var url = string.Format("https://t.me/{0}/{1}?embed=1", channelName, postId);
-            var web = new HtmlAgilityPack.HtmlWeb();
-            var doc = web.Load(url);
-
-            var div = doc.DocumentNode.Descendants("div")
-                .SingleOrDefault(m => m.Attributes["class"]?.Value == "tgme_widget_message_text");
-
-
-            if (div != null)
-                Console.WriteLine(div.InnerHtml);
-            else
-                Console.WriteLine("_________________");
-
+            IChannelTools tools = new WebChannelTools();
+            return tools.GetPost(channelName, postId);
         }
     }
 }

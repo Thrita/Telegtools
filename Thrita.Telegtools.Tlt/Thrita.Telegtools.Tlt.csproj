@@ -8,9 +8,10 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Thrita.Telegtools.Tlt</RootNamespace>
     <AssemblyName>Thrita.Telegtools.Tlt</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,10 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HtmlAgilityPack, Version=1.7.0.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlAgilityPack.1.7.0\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -51,12 +56,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="App.ConnectionStrings.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="App.SECRET.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Thrita.Telegtools.EntityFramework\Thrita.Telegtools.EntityFramework.csproj">
+      <Project>{fc119a4f-4d91-497f-af4f-58e6d0524470}</Project>
+      <Name>Thrita.Telegtools.EntityFramework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Thrita.Telegtools\Thrita.Telegtools.csproj">
       <Project>{92e9d2c2-fc18-4c95-a68c-f2509dbd63f0}</Project>
       <Name>Thrita.Telegtools</Name>

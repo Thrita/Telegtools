@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{92E9D2C2-FC18-4C95-A68C-F2509DBD63F0}</ProjectGuid>
+    <ProjectGuid>{FC119A4F-4D91-497F-AF4F-58E6D0524470}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Thrita.Telegtools</RootNamespace>
-    <AssemblyName>Thrita.Telegtools</AssemblyName>
+    <RootNamespace>Thrita.Telegtools.EntityFramework</RootNamespace>
+    <AssemblyName>Thrita.Telegtools.EntityFramework</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,20 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BigMath, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TLSharp.0.1.0.355\lib\net45\BigMath.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.7.1.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlAgilityPack.1.7.1\lib\Net45\HtmlAgilityPack.dll</HintPath>
-    </Reference>
-    <Reference Include="Ionic.Zip, Version=1.9.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetZip.1.9.3\lib\net20\Ionic.Zip.dll</HintPath>
-    </Reference>
-    <Reference Include="Ionic.ZLib, Version=2.0.0.14, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TLSharp.0.1.0.355\lib\net45\Ionic.ZLib.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -52,27 +46,21 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="TeleSharp.TL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TLSharp.0.1.0.355\lib\net45\TeleSharp.TL.dll</HintPath>
-    </Reference>
-    <Reference Include="TLSharp.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TLSharp.0.1.0.355\lib\net45\TLSharp.Core.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthorizeTool.cs" />
-    <Compile Include="ChannelTools.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="IChannelTools.cs" />
+    <Compile Include="TelegramPostConfig.cs" />
+    <Compile Include="TelegtoolsContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TelegramClientConfig.cs" />
-    <Compile Include="TelegramClientConfigProvider.cs" />
-    <Compile Include="TelegramClientProvider.cs" />
-    <Compile Include="TelegramPost.cs" />
-    <Compile Include="WebChannelTools.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Thrita.Telegtools\Thrita.Telegtools.csproj">
+      <Project>{92e9d2c2-fc18-4c95-a68c-f2509dbd63f0}</Project>
+      <Name>Thrita.Telegtools</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

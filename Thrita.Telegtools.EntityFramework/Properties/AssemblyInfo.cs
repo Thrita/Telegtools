@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Thrita.Telegtools")]
+[assembly: AssemblyTitle("Thrita.Telegtools.EntityFramework")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Thrita Co. Ltd")]
-[assembly: AssemblyProduct("Thrita.Telegtools.Tlt")]
-[assembly: AssemblyCopyright("Copyright © Thrita 2018")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Thrita.Telegtools.EntityFramework")]
+[assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,11 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("92e9d2c2-fc18-4c95-a68c-f2509dbd63f0")]
-
-//Specifies that types that are ordinarily visible only within the current
-//assembly are visible to a specified assembly.
-[assembly: InternalsVisibleTo("Thrita.Telegtools.Test", AllInternalsVisible = true)]
+[assembly: Guid("fc119a4f-4d91-497f-af4f-58e6d0524470")]
 
 // Version information for an assembly consists of the following four values:
 //
