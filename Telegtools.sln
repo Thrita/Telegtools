@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thrita.Telegtools.Test", "T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thrita.Telegtools.EntityFramework", "Thrita.Telegtools.EntityFramework\Thrita.Telegtools.EntityFramework.csproj", "{FC119A4F-4D91-497F-AF4F-58E6D0524470}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thrita.Telegtools.EntityFramework.Test", "Thrita.Telegtools.EntityFramework.Test\Thrita.Telegtools.EntityFramework.Test.csproj", "{E83977FC-DA49-4D70-82BC-7725F83E6BC2}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thrita.Telegtools.WebApi", "Thrita.Telegtools.WebApi\Thrita.Telegtools.WebApi.csproj", "{9A3A3747-A33C-4089-9941-B230639C0D55}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thrita.Telegtools.WebApi.Test", "Thrita.Telegtools.WebApi.Test\Thrita.Telegtools.WebApi.Test.csproj", "{BB9AECA9-1049-4284-B70C-23C5AD548A67}"
@@ -43,6 +45,10 @@ Global
 		{FC119A4F-4D91-497F-AF4F-58E6D0524470}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC119A4F-4D91-497F-AF4F-58E6D0524470}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC119A4F-4D91-497F-AF4F-58E6D0524470}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E83977FC-DA49-4D70-82BC-7725F83E6BC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E83977FC-DA49-4D70-82BC-7725F83E6BC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E83977FC-DA49-4D70-82BC-7725F83E6BC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E83977FC-DA49-4D70-82BC-7725F83E6BC2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9A3A3747-A33C-4089-9941-B230639C0D55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9A3A3747-A33C-4089-9941-B230639C0D55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A3A3747-A33C-4089-9941-B230639C0D55}.Release|Any CPU.ActiveCfg = Release|Any CPU

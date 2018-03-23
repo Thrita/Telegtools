@@ -5,11 +5,9 @@ using System.Threading.Tasks;
 
 namespace Thrita.Telegtools
 {
-    public class WebChannelTools : IChannelTools
+    public class WebChannelTools : ChannelToolsBase, IChannelTools
     {
-        public static int MAX_TITLE_LENGTH = 250;
-
-        public TelegramPost GetPost(string channelName, int postId)
+        public override TelegramPost GetPost(string channelName, int postId)
         {
             var telegramPost = Parse(GetPostHtml(channelName, postId));
 
@@ -22,7 +20,7 @@ namespace Thrita.Telegtools
             return telegramPost;
         }
 
-        public async Task<TelegramPost> GetPostAsync(string channelName, int postId)
+        public override async Task<TelegramPost> GetPostAsync(string channelName, int postId)
         {
             var telegramPost = Parse(await GetPostHtmlAsync(channelName, postId));
 

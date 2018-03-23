@@ -7,20 +7,27 @@ namespace Thrita.Telegtools.EntityFramework
 {
     public class TelegtoolsContext : DbContext
     {
+        public const string DefaultConnectionStringName = "Thrita.Telegtools.EntityFramework.DbConnection";
+        public const string DefaultSchemaAppSettingKey = "Thrita.Telegtools.EntityFramework.Schema";
+        public const string DefaultSchema = "Telegtools";
+
         public static readonly string SchemaName;
 
         static TelegtoolsContext()
         {
             Database.SetInitializer(new CreateDatabaseIfNotExists<TelegtoolsContext>());
-            SchemaName =
-                ConfigurationManager.AppSettings["Thrita.Telegtools.EntityFramework.Schema"] ?? "Telegtools";
+            SchemaName = ConfigurationManager.AppSettings[DefaultSchemaAppSettingKey] ?? DefaultSchema;
         }
 
-        public TelegtoolsContext() { }
+        public TelegtoolsContext() : this(DefaultConnectionStringName) { }
 
         public TelegtoolsContext(string nameOrConnectionString) : base(nameOrConnectionString) { }
 
         public DbSet<TelegramPost> TelegramPosts { get; set; }
+
+        public DbSet<TelegtoolsJob> Jobs { get; set; }
+
+        public DbSet<TelegtoolsLog> Logs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
