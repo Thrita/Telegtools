@@ -260,3 +260,7 @@ paket-files/
 __pycache__/
 *.pyc
 /Thrita.Telegtools.Tlt/App.SECRET.config
+/Thrita.Telegtools.Tlt/App.ConnectionStrings.config
+/Thrita.Telegtools.Tlt.Test/App.AppSettings.config
+/Thrita.Telegtools.Tlt.Test/App.ConnectionStrings.config
+/secret-codes.txt
