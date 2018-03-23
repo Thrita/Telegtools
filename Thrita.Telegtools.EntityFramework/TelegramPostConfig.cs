@@ -22,7 +22,7 @@ namespace Thrita.Telegtools.EntityFramework
 
             Property(tp => tp.ChannelName)
                 .IsRequired()
-                .HasMaxLength(255)
+                .HasMaxLength(WebChannelTools.MAX_CHANNEL_NAME_LENGTH)
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(
                     new IndexAttribute("IX_TelegramPost_ChannelName", 1) { IsUnique = false }));
 

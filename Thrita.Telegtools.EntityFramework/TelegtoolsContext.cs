@@ -25,6 +25,10 @@ namespace Thrita.Telegtools.EntityFramework
 
         public DbSet<TelegramPost> TelegramPosts { get; set; }
 
+        public DbSet<TelegtoolsJob> Jobs { get; set; }
+
+        public DbSet<TelegtoolsLog> Logs { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
