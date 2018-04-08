@@ -27,12 +27,14 @@ namespace Thrita.Telegtools.EntityFramework
 
         public TelegtoolsJob Job { get; set; }
 
+        internal TelegtoolsLog() { }
+
         public TelegtoolsLog(string channelName = null, int postId = 0)
         {
             LogDate = DateTime.UtcNow;
             if (channelName != null)
                 this.ChannelName = channelName;
-            if (PostId > 0)
+            if (postId > 0)
                 this.PostId = postId;
         }
     }

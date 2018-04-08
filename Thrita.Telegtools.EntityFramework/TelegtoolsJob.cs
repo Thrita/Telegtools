@@ -15,11 +15,10 @@ namespace Thrita.Telegtools.EntityFramework
 
         public int ToPostId { get; set; }
 
-        [MaxLength(WebChannelTools.MAX_CHANNEL_NAME_LENGTH)]
+        [MaxLength(ChannelToolsBase.MAX_CHANNEL_NAME_LENGTH)]
         public string ChannelName { get; set; }
 
         public string Message { get; set; }
-
 
         public DateTime StartDate { get; set; }
 
@@ -27,14 +26,16 @@ namespace Thrita.Telegtools.EntityFramework
 
         public TelegtoolsJobStatus Status { get; set; }
 
-        public TelegtoolsJob(string channelName = null, int fromPostId = 0, int toPostId=0)
+        internal TelegtoolsJob() { }
+
+        public TelegtoolsJob(string channelName = null, int fromPostId = 0, int toPostId = 0)
         {
             StartDate = DateTime.UtcNow;
             if (channelName != null)
-                this.ChannelName = channelName;
-            this.FromPostId = fromPostId;
-            this.ToPostId = toPostId;
-            this.Logs = new List<TelegtoolsLog>();
+                ChannelName = channelName;
+            FromPostId = fromPostId;
+            ToPostId = toPostId;
+            Logs = new List<TelegtoolsLog>();
         }
 
         public ICollection<TelegtoolsLog> Logs { get; set; }
@@ -42,7 +43,10 @@ namespace Thrita.Telegtools.EntityFramework
 
     public enum TelegtoolsJobStatus : byte
     {
-        InProcess = 0,
-        Done
+        Created = 0,
+        InProcess = 1,
+        Done = 100,
+        Canceled = 101,
+        Interrupted = 102
     }
 }

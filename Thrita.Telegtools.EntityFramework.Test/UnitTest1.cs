@@ -17,14 +17,27 @@ namespace Thrita.Telegtools.EntityFramework.Test
         }
 
         [Test]
-        public void GetPostsAndSaveAsync()
+        public void ExecuteJobAsync()
         {
+            var jobMan = new JobManager(new WebChannelTools());
+            var jobTask = jobMan.CreateJobAsync("telegram", 3, 7);
+            jobTask.Wait();
+            var job = jobTask.Result;
+
+            var task = jobMan.ExecuteJobAsync(job.Id);
+            System.Threading.Thread.Sleep(2000);
+
             using (var ctx = new TelegtoolsContext())
             {
-                var tool = new WebChannelTools();
-                var task = tool.GetPostsAndSaveAsync(ctx, "telegram", 1, 10);
-                task.Wait();
+                var jobNow = ctx.Jobs.Find(job.Id);
+                Assert.AreEqual(TelegtoolsJobStatus.InProcess, jobNow?.Status);
             }
+
+            task.Wait();
+            job = task.Result;
+
+            Assert.AreEqual(TelegtoolsJobStatus.Done, job.Status);
+            Assert.NotNull(job.EndDate);
         }
     }
 }

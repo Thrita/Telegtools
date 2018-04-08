@@ -48,12 +48,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JobAttachmentManager.cs" />
+    <Compile Include="JobManager.cs" />
+    <Compile Include="JobManagerBase.cs" />
     <Compile Include="TelegtoolsJob.cs" />
     <Compile Include="TelegramPostConfig.cs" />
     <Compile Include="TelegtoolsContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TelegtoolsLog.cs" />
-    <Compile Include="WebChannelToolsExtension.cs" />
+    <Compile Include="TelegtoolsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

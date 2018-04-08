@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 
 namespace Thrita.Telegtools.WebApi
 {
@@ -22,6 +19,14 @@ namespace Thrita.Telegtools.WebApi
 
             // Remove the XML formatter
             config.Formatters.Remove(config.Formatters.XmlFormatter);
+
+            // Fixing "Self referencing loop" issue
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling
+                = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            config.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+#if DEBUG
+            config.Formatters.JsonFormatter.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+#endif
         }
     }
 }

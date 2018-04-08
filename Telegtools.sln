@@ -19,6 +19,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thrita.Telegtools.WebApi", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thrita.Telegtools.WebApi.Test", "Thrita.Telegtools.WebApi.Test\Thrita.Telegtools.WebApi.Test.csproj", "{BB9AECA9-1049-4284-B70C-23C5AD548A67}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Private-Settings", "Private-Settings", "{BD69D486-4FEB-4F81-B804-D8934D88B9C9}"
+	ProjectSection(SolutionItems) = preProject
+		Private-Settings\App.AppSettings.config = Private-Settings\App.AppSettings.config
+		Private-Settings\App.ConnectionStrings.config = Private-Settings\App.ConnectionStrings.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thrita.Telegtools.Ftp", "Thrita.Telegtools.Ftp\Thrita.Telegtools.Ftp.csproj", "{91FD3753-DFAD-4D8B-B330-88B172406C12}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BE3CEBC8-DFFF-4A86-8EA9-B368C31EADE8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,9 +67,19 @@ Global
 		{BB9AECA9-1049-4284-B70C-23C5AD548A67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB9AECA9-1049-4284-B70C-23C5AD548A67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB9AECA9-1049-4284-B70C-23C5AD548A67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91FD3753-DFAD-4D8B-B330-88B172406C12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91FD3753-DFAD-4D8B-B330-88B172406C12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91FD3753-DFAD-4D8B-B330-88B172406C12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91FD3753-DFAD-4D8B-B330-88B172406C12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6BE0E9C8-A307-45C5-8C65-EDDD4EF5D24B} = {BE3CEBC8-DFFF-4A86-8EA9-B368C31EADE8}
+		{44A7CEBC-69D3-4CC5-9252-7909B8F72287} = {BE3CEBC8-DFFF-4A86-8EA9-B368C31EADE8}
+		{E83977FC-DA49-4D70-82BC-7725F83E6BC2} = {BE3CEBC8-DFFF-4A86-8EA9-B368C31EADE8}
+		{BB9AECA9-1049-4284-B70C-23C5AD548A67} = {BE3CEBC8-DFFF-4A86-8EA9-B368C31EADE8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2B41DD52-FD41-40BA-830A-69CF27268F6C}

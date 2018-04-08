@@ -12,7 +12,7 @@ namespace Thrita.Telegtools.WebApi.Controllers
     [RoutePrefix("posts")]
     public class PostsController : ApiController
     {
-        private readonly WebChannelTools _tools;
+        private readonly IChannelTools _tools;
 
         public PostsController()
         {
@@ -40,7 +40,7 @@ namespace Thrita.Telegtools.WebApi.Controllers
 
         [Route("{channelName}/{fromId:int:min(1)}/{toId:int:min(1)}")]
         [ResponseType(typeof(IEnumerable<TelegramPost>))]
-        public async Task<IHttpActionResult> Get(string channelName, int fromId, int toId)
+        public async Task<IHttpActionResult> GetPosts(string channelName, int fromId, int toId)
         {
             var posts = new HashSet<TelegramPost>();
 

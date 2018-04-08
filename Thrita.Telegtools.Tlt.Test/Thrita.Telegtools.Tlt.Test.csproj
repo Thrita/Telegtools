@@ -60,13 +60,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.AppSettings.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Include="..\Private-Settings\App.AppSettings.config">
+      <Link>App.AppSettings.config</Link>
+    </None>
+    <None Include="..\Private-Settings\App.ConnectionStrings.config">
+      <Link>App.ConnectionStrings.config</Link>
     </None>
     <None Include="App.config" />
-    <None Include="App.ConnectionStrings.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
