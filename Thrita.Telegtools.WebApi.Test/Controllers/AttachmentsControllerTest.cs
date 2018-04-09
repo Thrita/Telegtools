@@ -12,7 +12,7 @@ namespace Thrita.Telegtools.WebApi.Test.Controllers
         [Test]
         public void TestMethod1()
         {
-            IAttachmentTools aTools = new TelegFtpTools();
+            ITelegramPostSaver aTools = new TelegFtpTools();
             IChannelTools cTools = new WebChannelTools();
             var manager = new JobAttachmentManager(cTools, aTools);
             var job = manager.CreateJobAsync("k1inusa", 4902, 5000).Result;

@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using Thrita.Telegtools.EntityFramework;
 
 namespace Thrita.Telegtools.Tlt
@@ -12,6 +14,29 @@ namespace Thrita.Telegtools.Tlt
 
         static void Main(string[] args)
         {
+
+            string directory = @"C:\Temp\TLT";
+
+
+            var workMan =
+                new WorkManager(
+                    new WebChannelTools(),
+                    new List<ITelegramPostSaver>
+                    {
+                        new DiskWriter(directory),
+                        new DiskAttachmentSaver(directory)
+                    },
+                    new ConsoleTraceListener());
+
+            workMan.Execute("k1inusa", 5380, 5390);
+
+            Console.ReadLine();
+
+            return;
+
+
+
+
             if (args == null || args.Length == 0)
             {
                 ShowMenu();
@@ -55,16 +80,6 @@ namespace Thrita.Telegtools.Tlt
             }
         }
 
-        static void Authorize()
-        {
-            var callTask = Task.Run(() => new AuthorizeTool().AuthorizeAsyncStep1());
-            callTask.Wait();
-            Console.Write("Enter Telegram Login Code (sent to your telegram app): ");
-            var code = Console.ReadLine();
-            var callTask2 = Task.Run(() => new AuthorizeTool().AuthorizeAsyncStep2(code));
-            callTask.Wait();
-            Console.Write("Authorized successfully!");
-        }
 
         static void ShowMenu()
         {
@@ -87,7 +102,6 @@ namespace Thrita.Telegtools.Tlt
                             GatherChannelHistory(null);
                             break;
                         case ConsoleKey.D2:
-                            Authorize();
                             break;
                         case ConsoleKey.Enter:
 

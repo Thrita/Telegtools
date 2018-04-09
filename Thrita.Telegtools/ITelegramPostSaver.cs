@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Thrita.Telegtools
 {
-    public interface IAttachmentTools
+    public interface ITelegramPostSaver
     {
         void Save(TelegramPost telegramPost);
         Task SaveAsync(TelegramPost telegramPost);

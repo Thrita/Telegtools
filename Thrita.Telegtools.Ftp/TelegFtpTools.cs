@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Thrita.Telegtools.Ftp
 {
-    public class TelegFtpTools : IAttachmentTools
+    public class TelegFtpTools : ITelegramPostSaver
     {
         private readonly string _ftpUrl;
         private readonly string _ftpUser;

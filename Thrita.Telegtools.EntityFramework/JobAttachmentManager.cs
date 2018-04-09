@@ -6,9 +6,9 @@ namespace Thrita.Telegtools.EntityFramework
 {
     public sealed class JobAttachmentManager : JobManagerBase
     {
-        private readonly IAttachmentTools _attachmentTools;
+        private readonly ITelegramPostSaver _attachmentTools;
 
-        public JobAttachmentManager(IChannelTools channelTools, IAttachmentTools attachmentTools)
+        public JobAttachmentManager(IChannelTools channelTools, ITelegramPostSaver attachmentTools)
             : base(channelTools)
         {
             _attachmentTools = attachmentTools;

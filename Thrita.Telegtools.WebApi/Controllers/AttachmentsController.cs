@@ -29,7 +29,7 @@ namespace Thrita.Telegtools.WebApi.Controllers
             if (req == null || !ModelState.IsValid)
                 return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
 
-            IAttachmentTools attachment = new TelegFtpTools(req.FtpUrl, req.FtpUser, req.FtpPassword);
+            ITelegramPostSaver attachment = new TelegFtpTools(req.FtpUrl, req.FtpUser, req.FtpPassword);
             var manager = new JobAttachmentManager(_cTools, attachment);
             var job = await manager.CreateJobAsync(channelName, req.FromId, req.ToId);
 
