@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Thrita.Telegtools.Tlt
 {
-    class DiskAttachmentSaver : ITelegramPostSaver
+    internal class DiskAttachmentSaver : ITelegramPostSaver
     {
         private readonly string _directory;
 
@@ -16,8 +16,7 @@ namespace Thrita.Telegtools.Tlt
 
         public void Save(TelegramPost telegramPost)
         {
-            if (telegramPost?.AttachmentUri == null
-                || string.IsNullOrWhiteSpace(telegramPost?.AttachmentUri?.AbsolutePath))
+            if (string.IsNullOrWhiteSpace(telegramPost?.AttachmentUri?.AbsolutePath))
                 return;
 
             var req = WebRequest.Create(telegramPost.AttachmentUri);
@@ -38,7 +37,7 @@ namespace Thrita.Telegtools.Tlt
             }
         }
 
-        public async Task SaveAsync(TelegramPost telegramPost)
+        public Task SaveAsync(TelegramPost telegramPost)
         {
             throw new NotImplementedException();
         }
@@ -49,7 +48,6 @@ namespace Thrita.Telegtools.Tlt
             var dotIndex = post.AttachmentUri.ToString().LastIndexOf('.');
             if (dotIndex == -1) return string.Empty;
             var ext = post.AttachmentUri.ToString().Substring(dotIndex);
-            //return $"/{post.Date.Year}/{post.Id}{ext}";
             return Path.Combine(_directory, $"{post.Id}{ext}");
         }
     }

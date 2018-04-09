@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Thrita.Telegtools.EntityFramework;
 
 namespace Thrita.Telegtools.Tlt
 {
-    sealed class WorkManager
+    internal sealed class WorkManager
     {
         private readonly IChannelTools _channelTools;
         private readonly IEnumerable<ITelegramPostSaver> _postSavers;
@@ -61,7 +55,7 @@ namespace Thrita.Telegtools.Tlt
             }
             catch (Exception ex)
             {
-                _traceListener.WriteLine($"\nError:");
+                _traceListener.WriteLine("\nError:");
                 _traceListener.WriteLine($"\t{ex.Message}");
             }
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Thrita.Telegtools.Tlt
 {
-    class DiskWriter : ITelegramPostSaver
+    internal class DiskWriter : ITelegramPostSaver
     {
         private readonly string _directory;
 
@@ -28,7 +28,7 @@ namespace Thrita.Telegtools.Tlt
             }
         }
 
-        public async Task SaveAsync(TelegramPost telegramPost)
+        public Task SaveAsync(TelegramPost telegramPost)
         {
             throw new NotImplementedException();
         }
