@@ -34,12 +34,12 @@ namespace Thrita.Telegtools.Tlt
             {
                 for (int postId = fromPostId; postId <= toPostId; postId++)
                 {
-                    _traceListener.WriteLine($"Start getting posts #{postId}.");
+                    _traceListener.Write($"Start getting post #{postId}...");
                     var telegramPost = _channelTools.GetPost(channelName, postId);
 
                     if (telegramPost == null)
                     {
-                        _traceListener.WriteLine($"\tCould not read post #{postId}.");
+                        _traceListener.WriteLine($"\n\tCould not read post #{postId}.");
                     }
                     else
                     {
@@ -48,6 +48,7 @@ namespace Thrita.Telegtools.Tlt
                             try
                             {
                                 postSaver.Save(telegramPost);
+                                _traceListener.WriteLine($" Post #{postId} has been saved.");
                             }
                             catch (Exception ex)
                             {
@@ -61,10 +62,10 @@ namespace Thrita.Telegtools.Tlt
             catch (Exception ex)
             {
                 _traceListener.WriteLine($"\nError:");
-                _traceListener.WriteLine($"\t{ex}");
+                _traceListener.WriteLine($"\t{ex.Message}");
             }
 
-            _traceListener.WriteLine($"\nFinished storing posts {fromPostId} to {toPostId} from '{channelName}'.\n");
+            _traceListener.WriteLine($"\nFinished storing posts #{fromPostId} to #{toPostId} from channel '{channelName}'.\n");
         }
     }
 }

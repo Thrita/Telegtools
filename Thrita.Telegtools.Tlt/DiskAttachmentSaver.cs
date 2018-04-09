@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Thrita.Telegtools.Tlt
@@ -19,7 +16,7 @@ namespace Thrita.Telegtools.Tlt
 
         public void Save(TelegramPost telegramPost)
         {
-            if (telegramPost?.AttachmentUri == null 
+            if (telegramPost?.AttachmentUri == null
                 || string.IsNullOrWhiteSpace(telegramPost?.AttachmentUri?.AbsolutePath))
                 return;
 
@@ -34,7 +31,7 @@ namespace Thrita.Telegtools.Tlt
                     {
                         using (var file = File.Create(SavePath(telegramPost)))
                         {
-                            //file.Write(stream);
+                            stream.CopyTo(file);
                         }
                     }
                 }

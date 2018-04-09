@@ -214,7 +214,7 @@
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="..\Private-Settings\App.AppSettings.config">
       <Link>App.AppSettings.config</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\Private-Settings\App.ConnectionStrings.config">
       <Link>App.ConnectionStrings.config</Link>
