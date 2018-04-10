@@ -28,7 +28,7 @@ namespace Thrita.Telegtools.Tlt
             {
                 for (int postId = fromPostId; postId <= toPostId; postId++)
                 {
-                    _traceListener.Write($"Start getting post #{postId}...");
+                    _traceListener.Write($"\nStart getting post #{postId}  ");
                     var telegramPost = _channelTools.GetPost(channelName, postId);
 
                     if (telegramPost == null)
@@ -39,10 +39,12 @@ namespace Thrita.Telegtools.Tlt
                     {
                         foreach (var postSaver in _postSavers)
                         {
+                            SpinAnimation.Start(250);
                             try
                             {
                                 postSaver.Save(telegramPost);
-                                _traceListener.WriteLine($" Post #{postId} has been saved.");
+                                SpinAnimation.Stop();
+                                _traceListener.Write($"\n\t{postSaver.GetType().Name} has saved post #{postId}.");
                             }
                             catch (Exception ex)
                             {
