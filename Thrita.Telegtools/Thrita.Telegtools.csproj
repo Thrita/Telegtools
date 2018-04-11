@@ -52,6 +52,7 @@
     <Compile Include="ITelegramPostSaver.cs" />
     <Compile Include="IChannelTools.cs" />
     <Compile Include="ITelegtoolsRepository.cs" />
+    <Compile Include="PersianHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TelegramClientConfig.cs" />
     <Compile Include="TelegramClientConfigProvider.cs" />

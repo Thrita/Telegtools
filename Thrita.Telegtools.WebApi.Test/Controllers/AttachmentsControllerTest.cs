@@ -1,5 +1,4 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using NUnit.Framework.Internal;
 using Thrita.Telegtools.EntityFramework;
 using Thrita.Telegtools.Ftp;
@@ -15,7 +14,7 @@ namespace Thrita.Telegtools.WebApi.Test.Controllers
             ITelegramPostSaver aTools = new TelegFtpTools();
             IChannelTools cTools = new WebChannelTools();
             var manager = new JobAttachmentManager(cTools, aTools);
-            var job = manager.CreateJobAsync("k1inusa", 4902, 5000).Result;
+            var job = manager.CreateJobAsync("telegram", 2, 77).Result;
 
             manager.ExecuteJobAsync(job.Id).Wait();
         }
